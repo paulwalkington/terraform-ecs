@@ -49,7 +49,8 @@ resource "aws_ecs_task_definition" "app" {
         {
             # this value should not be hard coded aws_db_instance.default.endpoint
           name  = "WORDPRESS_DB_HOST"
-          value = "wordpress.cfkqy4eumsse.us-east-1.rds.amazonaws.com"
+        #   value = "wordpress.cfkqy4eumsse.us-east-1.rds.amazonaws.com:3306"
+          value = "${aws_db_instance.default.endpoint}"
         },
         {
           name  = "WORDPRESS_DB_NAME"
