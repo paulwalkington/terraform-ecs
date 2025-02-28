@@ -19,6 +19,7 @@ resource "aws_ecs_cluster" "main" {
 resource "aws_ecs_task_definition" "app" {
     family                   = "cb-app-task"
     execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
+    task_role_arn            = aws_iam_role.ecs_task_role.arn
     network_mode             = "awsvpc"
     requires_compatibilities = ["FARGATE"]
     cpu                      = var.fargate_cpu
@@ -43,7 +44,26 @@ resource "aws_ecs_task_definition" "app" {
         "containerPort": var.app_port,
         "hostPort": var.app_port
       }
-    ]
+    ],
+    "environment" = [
+        {
+            # this value should not be hard coded aws_db_instance.default.endpoint
+          name  = "WORDPRESS_DB_HOST"
+          value = "wordpress.cfkqy4eumsse.us-east-1.rds.amazonaws.com"
+        },
+        {
+          name  = "WORDPRESS_DB_NAME"
+          value = "wordpress"
+        },
+        {
+          name  = "WORDPRESS_DB_USER"
+          value = "foo"
+        },
+        {
+          name  = "WORDPRESS_DB_PASSWORD"
+          value = "foobarbaz"
+        }
+      ]
   }
 ])
 }

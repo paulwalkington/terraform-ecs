@@ -22,7 +22,8 @@ variable "az_count" {
 
 variable "app_image" {
     description = "Docker image to run in the ECS cluster"
-    default = "nginxdemos/hello:latest"
+    # default = "nginxdemos/hello:latest"
+    default = "wordpress:latest"
 }
 
 variable "app_port" {
