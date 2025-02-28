@@ -41,3 +41,17 @@ resource "aws_security_group" "ecs_tasks" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 }
+
+resource "aws_security_group" "rds_sg" {
+  name        = "rds-security-group"
+
+  vpc_id = aws_vpc.main.id
+
+  # Add any additional ingress/egress rules as needed
+  ingress {
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
