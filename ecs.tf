@@ -59,6 +59,10 @@ resource "aws_ecs_task_definition" "app" {
           name  = "WORDPRESS_DB_USER"
           value = "foo"
         }
+        # {
+        #   name  = "WORDPRESS_DB_PASSWORD"
+        #   value = "foobarbaz"
+        # }
       ],
       "secrets": [
         {
